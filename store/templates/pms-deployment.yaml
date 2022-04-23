@@ -1,10 +1,9 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.store.name }}
-  name: {{ .Values.store.name }}
+    app: {{ .Values.store.name }}-deployment
+  name: {{ .Values.store.name }}-deployment
   namespace: {{ .Values.ns }}
 spec:
   replicas: {{ .Values.store.replicaCount }}
@@ -15,11 +14,11 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.store.name }}
+        app: {{ .Values.store.name }}-deployment
     spec:
       containers:
         - image: {{ .Values.store.image }}:{{ .Values.store.version }}
-          name: {{ .Values.store.name }}
+          name: {{ .Values.store.name }}-container
           env:
             - name: COLOR
               value: {{ .Values.store.env.COLOR }}

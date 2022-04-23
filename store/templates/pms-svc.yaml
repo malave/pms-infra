@@ -3,8 +3,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: {{ .Values.store.name }}
-  name: {{ .Values.store.name }}
+    app: {{ .Values.store.name }}-svc
+  name: {{ .Values.store.name }}-svc
   namespace: {{ .Values.ns }}
 spec:
   type: NodePort
@@ -13,5 +13,5 @@ spec:
     protocol: TCP
     targetPort: {{ .Values.network.port }}
   selector:
-    app: {{ .Values.store.name }}
+    app: {{ .Values.store.name }}-deployment
 ---
