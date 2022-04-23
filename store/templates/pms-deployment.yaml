@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - image: {{ .Values.store.image }}:{{ .Values.store.version }}
-          name: {{ .Values.store.name }}-container
+          name: {{ .Values.store.name }}-deployment
           env:
             - name: COLOR
               value: {{ .Values.store.env.COLOR }}
