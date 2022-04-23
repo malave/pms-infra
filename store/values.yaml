@@ -1,0 +1,12 @@
+ns: pms
+store:
+  name: popular-movie-store
+  image: docker.io/alexandergf1996/getting-started
+  version: 1.0.0-SNAPSHOT
+  replicaCount: 1
+  env:
+    COLOR: "blue"
+network:
+  host: me.local
+  port: 8080
+  path: /

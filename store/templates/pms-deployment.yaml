@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.store.name }}
+  name: {{ .Values.store.name }}
+  namespace: {{ .Values.ns }}
+spec:
+  replicas: {{ .Values.store.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.store.name }}
+  strategy: { }
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.store.name }}
+    spec:
+      containers:
+        - image: {{ .Values.store.image }}:{{ .Values.store.version }}
+          name: {{ .Values.store.name }}
+          env:
+            - name: COLOR
+              value: {{ .Values.store.env.COLOR }}
+          resources: { }
+---
+
