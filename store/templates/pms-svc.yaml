@@ -3,8 +3,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: getting-started
-  name: getting-started
+    app: {{ .Values.store.name }}
+  name: {{ .Values.store.name }}
   namespace: {{ .Values.ns }}
 spec:
   ports:
@@ -12,5 +12,5 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: getting-started
+    app: {{ .Values.store.name }}
 ---
