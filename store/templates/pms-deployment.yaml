@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.store.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.store.name }}
+      app: {{ .Values.store.name }}-deployment
   strategy: { }
   template:
     metadata:
