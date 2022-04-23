@@ -7,10 +7,11 @@ metadata:
   name: {{ .Values.store.name }}
   namespace: {{ .Values.ns }}
 spec:
+  type: NodePort
   ports:
-  - port: 8080
+  - port: {{ .Values.network.port }}
     protocol: TCP
-    targetPort: 8080
+    targetPort: {{ .Values.network.port }}
   selector:
     app: {{ .Values.store.name }}
 ---

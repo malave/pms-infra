@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: {{ .Values.store.name }}
   namespace: {{ .Values.ns }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
     - host: {{ .Values.network.host }}
