@@ -10,3 +10,4 @@ network:
   host: me.local
   port: 8080
   path: /
+  hostNetwork: true

@@ -12,6 +12,7 @@ spec:
         paths:
           - path: {{ .Values.network.path }}
             pathType: Prefix
+
             backend:
               service:
                 name: {{ .Values.store.name }}-svc
