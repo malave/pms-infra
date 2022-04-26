@@ -16,6 +16,6 @@ spec:
 
             backend:
               service:
-                name: {{ template "store.name" . }}
+                name: {{ template "store.fullname" . }}
                 port:
                   number: {{ .Values.service.port }}
