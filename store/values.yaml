@@ -1,13 +1,35 @@
+#  https://github.com/argoproj/argo-rollouts/tree/master/examples/helm-blue-green
 ns: pms
 store:
-  name: popular-movie-store
-  image: docker.io/alexandergf1996/getting-started
-  version: 1.0.0-SNAPSHOT
-  replicaCount: 1
   env:
     COLOR: "blue"
-network:
-  host: me.local
-  port: 8080
+
+replicaCount: 1
+
+image:
+  repository: docker.io/alexandergf1996/getting-started
+  tag: 1.0.0-SNAPSHOT
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+  kubernetes.io/tls-acme: "true"
   path: /
-  hostNetwork: true
+  hosts:
+    - me.local
+  tls: []
+
+resources: {}
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

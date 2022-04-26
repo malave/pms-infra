@@ -2,16 +2,39 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: {{ template "store.fullname" . }}
   labels:
-    app: {{ .Values.store.name }}-svc
-  name: {{ .Values.store.name }}-svc
-  namespace: {{ .Values.ns }}
+    app: {{ template "store.name" . }}
+    chart: {{ template "store.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
-  type: NodePort
+  type: {{ .Values.service.type }}
   ports:
-  - port: {{ .Values.network.port }}
-    protocol: TCP
-    targetPort: {{ .Values.network.port }}
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
   selector:
-    app: {{ .Values.store.name }}-deployment
+    app: {{ template "store.name" . }}
+    release: {{ .Release.Name }}
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "store.fullname" . }}-preview
+  labels:
+    app: {{ template "store.name" . }}
+    chart: {{ template "store.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "store.name" . }}
+    release: {{ .Release.Name }}

@@ -3,7 +3,7 @@ colon := ":"
 ns := pms
 
 export
-init: start_minikube install_addons init_help_repos install_argo
+init: start_minikube install_addons init_help_repos install_argo install_argo_rollout
 
 start_minikube:
 	minikube start --vm=true --cpus 4 --memory 4098 --driver='hyperkit'
@@ -24,6 +24,10 @@ init_help_repos:
 install_argo:
 	kubectl create namespace argocd
 	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+install_argo_rollout:
+	kubectl create namespace argo-rollouts
+	kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 
 argo_fwd:
 	kubectl -n argocd port-forward svc/argocd-server 8080:443
